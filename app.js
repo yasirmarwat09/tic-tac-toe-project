@@ -2,7 +2,7 @@
 const cells = document.querySelectorAll(".cell");
 const statusText = document.querySelector("#status");
 const resetButton = document.querySelector("#resetBtn");
-const newGameButton = document.querySelector("#newGameBtn");
+const newGameButton = document.querySelector("#newGameBtn"); // Fixed selector to match HTML
 const winnerModal = document.querySelector("#winnerModal");
 const winnerName = document.querySelector("#winnerName");
 const closeModalButton = document.querySelector("#closeModalBtn");
@@ -64,7 +64,8 @@ const handleCellClick = (event) => {
   if (winner) {
     statusText.innerText = `🎉 Player ${winner} Wins!`;
     cells.forEach((c) => c.classList.add("disabled"));
-    winnerModal.style.display = "block";
+    // Changed: Use classList to add the active class AND keep style.display
+    winnerModal.classList.add("active");
     winnerName.innerText = winner;
     return;
   }
@@ -84,7 +85,8 @@ const resetGame = () => {
 
   isPlayerX = true;
   statusText.innerText = "Player X's turn";
-  winnerModal.style.display = "none";
+  // Changed: Use classList to remove the active class AND keep style.display none
+  winnerModal.classList.remove("active");
 
   updateButtons(); // Reset buttons based on new state
 };
