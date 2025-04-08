@@ -1,0 +1,249 @@
+:root {
+  --primary-color: #6c5ce7;
+  --secondary-color: #a29bfe;
+  --accent-color: #fd79a8;
+  --light-color: #f8f9fa;
+  --dark-color: #2d3436;
+  --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.container {
+  background-color: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: var(--box-shadow);
+  max-width: 420px;
+  width: 100%;
+}
+
+.game-title {
+  text-align: center;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.game-status {
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  height: 20px;
+  color: var(--dark-color);
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  margin-bottom: 20px;
+}
+
+.cell {
+  aspect-ratio: 1 / 1;
+  background-color: var(--light-color);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--primary-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+}
+
+.cell:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.cell.x {
+  color: var(--primary-color);
+}
+
+.cell.o {
+  color: var(--accent-color);
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+}
+
+.btn-reset,
+.btn-new {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+}
+
+/* New class for disabled buttons */
+.btn-disabled {
+  pointer-events: none; /* Disables clicks */
+  opacity: 0.5; /* Makes it visually appear disabled */
+  background-color: gray !important; /* Gives a disabled look */
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.winner-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Centers both horizontally and vertically */
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.winner-content {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 90%;
+  width: 350px;
+  animation: pop-in 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  margin: auto; /* Ensures centering */
+}
+
+@keyframes pop-in {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.winner-title {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.winner-name {
+  display: block;
+  font-size: 2.2rem;
+  color: var(--accent-color);
+  margin: 15px 0;
+  font-weight: 700;
+}
+
+.winner-btn {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 15px;
+}
+
+.winner-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+  .container {
+    padding: 15px;
+  }
+
+  .game-title {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+  }
+
+  .cell {
+    font-size: 1.8rem;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+
+  .winner-content {
+    padding: 25px;
+  }
+}
+
+/* Ensure the game fits in viewport height */
+@media (max-height: 700px) {
+  .container {
+    transform: scale(0.9);
+    transform-origin: center;
+  }
+}
+
+@media (max-height: 600px) {
+  .container {
+    transform: scale(0.8);
+  }
+}
+.disabled {
+  pointer-events: none; /* Prevents clicks */
+  opacity: 0.5; /* Makes it look disabled */
+  user-select: none; /* Prevents text selection */
+  background-color: lightblue;
+}
